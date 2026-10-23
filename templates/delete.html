@@ -1,0 +1,44 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Task | TaskFlow</title>
+    <link rel="stylesheet" href="{% static 'css/edit_task.css' %}">
+</head>
+<body>
+
+    <div class="edit-container">
+        <h1>Edit Task</h1>
+
+        <form method="post" action="">
+            {% csrf_token %}
+
+            <label for="task_name">Task Name</label>
+            <input
+                type="text"
+                name="task_name"
+                id="task_name"
+                value="{{ mytask.task }}"
+                required
+            >
+
+            <label class="checkbox-label" for="status">
+                <input
+                    type="checkbox"
+                    name="status"
+                    value="true"
+                    id="status"
+                    {% if mytask.is_completed %}checked{% endif %}
+                >
+                <span>Mark as completed</span>
+            </label>
+
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+
+</body>
+</html>

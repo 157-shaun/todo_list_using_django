@@ -1,0 +1,297 @@
+
+/* ===== Global Styles ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --background: #f5f7ff;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #eef2ff, #f8fafc, #eff6ff);
+    color: var(--text-dark);
+    min-height: 100vh;
+}
+
+/* ===== Page Layout ===== */
+.page-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+}
+
+/* ===== Edit Card ===== */
+.edit-card {
+    width: 100%;
+    max-width: 440px;
+    padding: 38px;
+    background: var(--white);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: 22px;
+    box-shadow: 0 20px 60px rgba(30, 41, 59, 0.08);
+    animation: fadeIn 0.5s ease;
+}
+
+/* ===== Icon ===== */
+.icon-wrapper {
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef2ff;
+    color: var(--primary-dark);
+    border-radius: 16px;
+    font-size: 30px;
+    margin-bottom: 22px;
+}
+
+/* ===== Heading ===== */
+h1 {
+    font-size: 30px;
+    font-weight: 750;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* ===== Form ===== */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 650;
+    color: #334155;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 14px 15px;
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--text-dark);
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    outline: none;
+    transition: 0.25s ease;
+}
+
+.form-group input[type="text"]::placeholder {
+    color: #94a3b8;
+}
+
+.form-group input[type="text"]:focus {
+    background: var(--white);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+}
+
+/* ===== Completion Checkbox ===== */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.checkbox-container:hover {
+    background: #f1f5f9;
+    border-color: #c7d2fe;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+
+.custom-checkbox {
+    flex-shrink: 0;
+    width: 21px;
+    height: 21px;
+    border: 2px solid #cbd5e1;
+    border-radius: 6px;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s ease;
+}
+
+.checkbox-container input:checked + .custom-checkbox {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.checkbox-container input:checked + .custom-checkbox::after {
+    content: "✓";
+    color: var(--white);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.checkbox-container input:focus-visible + .custom-checkbox {
+    outline: 3px solid #c7d2fe;
+    outline-offset: 3px;
+}
+
+.checkbox-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.checkbox-text strong {
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.checkbox-text small {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* ===== Save Button ===== */
+.save-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 18px;
+    border: none;
+    border-radius: 11px;
+    background: var(--primary);
+    color: var(--white);
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 650;
+    cursor: pointer;
+    box-shadow: 0 5px 12px rgba(99, 102, 241, 0.18);
+    transition: 0.25s ease;
+}
+
+.save-btn span {
+    font-size: 20px;
+    transition: transform 0.25s ease;
+}
+
+.save-btn:hover {
+    background: var(--primary-dark);
+    box-shadow: 0 8px 18px rgba(79, 70, 229, 0.25);
+    transform: translateY(-2px);
+}
+
+.save-btn:hover span {
+    transform: translateX(4px);
+}
+
+.save-btn:active {
+    transform: translateY(0);
+}
+
+/* ===== Cancel Link ===== */
+.cancel-link {
+    align-self: center;
+    margin-top: -10px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.cancel-link:hover {
+    color: var(--primary-dark);
+}
+
+/* ===== Footer ===== */
+.footer-text {
+    margin-top: 24px;
+    color: #94a3b8;
+    font-size: 12px;
+    text-align: center;
+}
+
+/* ===== Animation ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 480px) {
+    .page-container {
+        padding: 20px 14px;
+    }
+
+    .edit-card {
+        padding: 27px 22px;
+        border-radius: 18px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .subtitle {
+        margin-bottom: 24px;
+    }
+
+    form {
+        gap: 20px;
+    }
+}
+
+/* ===== Reduced Motion Accessibility ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

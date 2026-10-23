@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ToDo List | Taskly</title>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+    <header class="site-header">
+        <nav class="navbar">
+            <a href="/" class="brand">TaskFlow<span>.</span></a>
+
+            <ul class="nav-links">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/about-us">About Us</a></li>
+                <li><a href="/contact-us">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-container">
+
+        <section class="intro">
+            <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
+            <h1>To-do list<span>.</span></h1>
+            <p class="subtitle">
+                Small steps every day add up to big things.
+            </p>
+        </section>
+
+        <section class="todo-card">
+
+            <!-- Add Task Form at the Top -->
+            <div class="add-task">
+                <h2>Add a new task</h2>
+
+                <form method="post"
+                      action="{% url 'home' %}"
+                      class="task-form">
+
+                    {% csrf_token %}
+
+                    <label for="task_name">Task name</label>
+
+                    <div class="input-row">
+                        <input
+                            type="text"
+                            name="task_name"
+                            id="task_name"
+                            placeholder="What do you need to do?"
+                            required
+                        >
+
+                        <button type="submit">
+                            Add task <span>＋</span>
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- Task Heading -->
+            <div class="section-heading">
+                <div>
+                    <h2>Your tasks</h2>
+                    <p>Keep your day moving forward.</p>
+                </div>
+            </div>
+
+            <!-- Existing Task List -->
+            <div class="task-list">
+
+                {% for task in tasks %}
+
+                <article class="task-item {% if task.is_completed %}completed{% endif %}">
+
+                    <div class="task-status">
+                        {% if task.is_completed %}
+                            ✓
+                        {% else %}
+                            •
+                        {% endif %}
+                    </div>
+
+                    <div class="task-content">
+                        <p class="task-name">{{ task.task }}</p>
+
+                        <span class="status-label {% if task.is_completed %}status-done{% else %}status-pending{% endif %}">
+                            {% if task.is_completed %}
+                                Done
+                            {% else %}
+                                Incomplete
+                            {% endif %}
+                        </span>
+                    </div>
+
+                    <div class="task-actions">
+                        <a href="/edit-task/{{ task.id }}"
+                           class="action-link edit-link">
+                            Edit
+                        </a>
+
+                        <a href="/delete-task/{{ task.id }}"
+                           class="action-link delete-link"
+                           onclick="return choice()">
+                            Delete
+                        </a>
+                    </div>
+
+                </article>
+
+                {% empty %}
+
+                <div class="empty-state">
+                    <div class="empty-icon">✓</div>
+                    <h3>Nothing on your list yet</h3>
+                    <p>Add a task above and make today count.</p>
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+        <footer class="page-footer">
+            One task at a time. You've got this.
+        </footer>
+
+    </main>
+
+    <script>
+        function choice() {
+            return confirm("Do you wish to delete this task?");
+        }
+    </script>
+
+</body>
+</html>
